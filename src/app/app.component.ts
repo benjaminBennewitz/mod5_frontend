@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterOutlet, LoginComponent, FormsModule]
+    imports: [CommonModule, RouterOutlet, LoginComponent, FormsModule,]
 })
 export class AppComponent {
   title = 'todolist_frontend';
