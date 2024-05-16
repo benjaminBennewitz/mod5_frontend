@@ -20,6 +20,7 @@ constructor(private as:AuthService, private router:Router){}
     try{
       let resp = await this.as.loginWithUserAndPassword(this.username, this.password);
 
+      let json = await resp.json();
       localStorage.setItem('token', json.token);
       
       console.log(resp);
