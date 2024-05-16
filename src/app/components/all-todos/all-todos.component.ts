@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
@@ -28,10 +28,7 @@ export class AllTodosComponent {
   }
 
   loadTodos(){
-    const url = environment.baseUrl + '/todos/';
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
-    
-    return lastValueFrom(this.http.get(url, {headers: headers} ));
+    const url = environment.baseUrl + '/todos/';    
+    return lastValueFrom(this.http.get(url));
   }
 }

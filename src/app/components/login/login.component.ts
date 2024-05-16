@@ -3,12 +3,6 @@ import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-// Benutzerdefinierter Typ für die Antwort von loginWithUserAndPassword
-interface LoginResponse {
-  token: string; // Annahme: Das Token ist ein String
-  // Hier können weitere Attribute hinzugefügt werden, falls vorhanden
-}
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -24,18 +18,14 @@ export class LoginComponent {
 
   async login() {
     try {
-      // Login versuchen
       let resp: any = await this.as.loginWithUserAndPassword(this.username, this.password);
 
-      // Token aus der Antwort extrahieren und speichern
-      let token = resp.token;
-      localStorage.setItem('token', token);
-
       console.log(resp);
+      localStorage.setItem('token', resp['token']);
       this.router.navigateByUrl('/todos');
+      
     } catch (e) {
-      // Fehler beim Login behandeln
-      alert('Login abgelehnt');
+      alert('Login declined');
       console.error(e);
     }
   }
