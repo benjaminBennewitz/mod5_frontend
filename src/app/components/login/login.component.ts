@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,18 @@ export class LoginComponent {
   username:string = '';
   password:string = '';
 
-constructor(private as:AuthService){}
+constructor(private as:AuthService, private router:Router){}
 
  async login(){
     try{
       let resp = await this.as.loginWithUserAndPassword(this.username, this.password);
+
+      localStorage.setItem('token', json.token);
+      
       console.log(resp);
+      this.router.navigateByUrl('/todos');
     } catch(e){
+      alert('Login declined')
         console.error(e);
       }
   }
